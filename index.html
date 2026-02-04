@@ -13,7 +13,7 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
             min-height: 100vh;
             padding: 20px;
         }
@@ -21,30 +21,32 @@
         .container {
             max-width: 800px;
             margin: 0 auto;
-            background: white;
+            background: #1e1e2e;
             border-radius: 15px;
             padding: 30px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            border: 1px solid #2a2a3e;
         }
 
         h1 {
-            color: #333;
+            color: #e0e0e0;
             margin-bottom: 10px;
             text-align: center;
         }
 
         .subtitle {
             text-align: center;
-            color: #666;
+            color: #a0a0a0;
             margin-bottom: 30px;
             font-size: 14px;
         }
 
         .input-section {
-            background: #f8f9fa;
+            background: linear-gradient(135deg, #2a2a3e 0%, #1e1e2e 100%);
             padding: 20px;
             border-radius: 10px;
             margin-bottom: 20px;
+            border: 1px solid #3a3a4e;
         }
 
         .input-group {
@@ -57,20 +59,86 @@
 
         label {
             font-weight: 600;
-            color: #555;
+            color: #b0b0b0;
         }
 
         input, select {
             padding: 10px;
-            border: 2px solid #ddd;
+            border: 2px solid #3a3a4e;
             border-radius: 5px;
             font-size: 16px;
             transition: border-color 0.3s;
+            background: #2a2a3e;
+            color: #e0e0e0;
         }
 
         input:focus, select:focus {
             outline: none;
-            border-color: #667eea;
+            border-color: #a78bfa;
+        }
+
+        select option {
+            background: #2a2a3e;
+            color: #e0e0e0;
+        }
+
+        .weight-slider-container {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        input[type="range"] {
+            width: 100%;
+            height: 8px;
+            border-radius: 5px;
+            background: linear-gradient(90deg, #4a4a5e 0%, #6a5acd 50%, #a78bfa 100%);
+            outline: none;
+            padding: 0;
+            border: none;
+            cursor: pointer;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #a78bfa 0%, #8b5cf6 100%);
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 2px 8px rgba(167, 139, 250, 0.4);
+        }
+
+        input[type="range"]::-webkit-slider-thumb:hover {
+            background: linear-gradient(135deg, #c4b5fd 0%, #a78bfa 100%);
+            transform: scale(1.2);
+            box-shadow: 0 4px 12px rgba(167, 139, 250, 0.6);
+        }
+
+        input[type="range"]::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #a78bfa 0%, #8b5cf6 100%);
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s;
+            box-shadow: 0 2px 8px rgba(167, 139, 250, 0.4);
+        }
+
+        input[type="range"]::-moz-range-thumb:hover {
+            background: linear-gradient(135deg, #c4b5fd 0%, #a78bfa 100%);
+            transform: scale(1.2);
+            box-shadow: 0 4px 12px rgba(167, 139, 250, 0.6);
+        }
+
+        .weight-display {
+            text-align: center;
+            font-weight: bold;
+            color: #a78bfa;
+            font-size: 16px;
         }
 
         button {
@@ -84,71 +152,98 @@
         }
 
         .btn-add {
-            background: #667eea;
+            background: linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%);
             color: white;
             grid-column: 1 / -1;
         }
 
         .btn-add:hover {
-            background: #5568d3;
+            background: linear-gradient(135deg, #a78bfa 0%, #818cf8 100%);
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 5px 15px rgba(139, 92, 246, 0.4);
         }
 
         .btn-delete {
-            background: #e74c3c;
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
             color: white;
             padding: 8px 15px;
         }
 
         .btn-delete:hover {
-            background: #c0392b;
+            background: linear-gradient(135deg, #f87171 0%, #ef4444 100%);
         }
 
         .grades-list {
             margin-bottom: 20px;
         }
 
-        .grade-item {
-            background: white;
+        .subject-group {
+            margin-bottom: 25px;
+            background: linear-gradient(135deg, #2a2a3e 0%, #1e1e2e 100%);
             padding: 15px;
+            border-radius: 10px;
+            border: 1px solid #3a3a4e;
+        }
+
+        .subject-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 15px;
+            background: linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%);
+            color: white;
             border-radius: 8px;
             margin-bottom: 10px;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+        }
+
+        .subject-average {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .grade-item {
+            background: #2a2a3e;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 8px;
             display: grid;
-            grid-template-columns: 2fr 1fr 1fr auto;
+            grid-template-columns: 1fr 1.5fr auto;
             gap: 15px;
             align-items: center;
-            border: 2px solid #e0e0e0;
+            border: 2px solid #3a3a4e;
             transition: all 0.3s;
         }
 
         .grade-item:hover {
-            border-color: #667eea;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            border-color: #8b5cf6;
+            box-shadow: 0 3px 10px rgba(139, 92, 246, 0.3);
         }
 
         .grade-name {
             font-weight: 600;
-            color: #333;
+            color: #e0e0e0;
         }
 
         .grade-value {
-            color: #667eea;
+            color: #a78bfa;
             font-weight: bold;
             font-size: 18px;
         }
 
         .grade-weight {
-            color: #666;
+            color: #b0b0b0;
             font-size: 14px;
         }
 
         .result-section {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%);
             color: white;
             padding: 25px;
             border-radius: 10px;
             text-align: center;
+            box-shadow: 0 5px 20px rgba(139, 92, 246, 0.4);
         }
 
         .result-value {
@@ -165,18 +260,18 @@
         .empty-state {
             text-align: center;
             padding: 40px;
-            color: #999;
+            color: #6b7280;
         }
 
         .clear-all {
-            background: #95a5a6;
+            background: linear-gradient(135deg, #6b7280 0%, #4b5563 100%);
             color: white;
             width: 100%;
             margin-top: 10px;
         }
 
         .clear-all:hover {
-            background: #7f8c8d;
+            background: linear-gradient(135deg, #9ca3af 0%, #6b7280 100%);
         }
 
         .subject-group {
@@ -209,7 +304,7 @@
             border-radius: 8px;
             margin-bottom: 8px;
             display: grid;
-            grid-template-columns: 3fr 1fr 1.2fr auto;
+            grid-template-columns: 1fr 1.5fr auto;
             gap: 15px;
             align-items: center;
             border: 2px solid #e0e0e0;
@@ -221,21 +316,21 @@
         }
 
         .note-scale {
-            background: #fff3cd;
+            background: linear-gradient(135deg, #422006 0%, #78350f 100%);
             padding: 15px;
             border-radius: 8px;
             margin-bottom: 20px;
-            border-left: 4px solid #ffc107;
+            border-left: 4px solid #f59e0b;
         }
 
         .note-scale h3 {
-            color: #856404;
+            color: #fbbf24;
             margin-bottom: 10px;
             font-size: 16px;
         }
 
         .note-scale p {
-            color: #856404;
+            color: #fcd34d;
             font-size: 14px;
             margin: 5px 0;
         }
@@ -257,9 +352,6 @@
                     <label>Fach</label>
                 </div>
                 <div>
-                    <label>Beschreibung</label>
-                </div>
-                <div>
                     <label>Note</label>
                 </div>
                 <div>
@@ -267,7 +359,7 @@
                 </div>
                 <div></div>
             </div>
-            <div class="input-group" style="grid-template-columns: 1.5fr 1.5fr 1fr 1fr;">
+            <div class="input-group" style="grid-template-columns: 2fr 1fr 1.5fr;">
                 <select id="subjectSelect" onchange="handleSubjectChange()">
                     <option value="">Fach wählen...</option>
                     <optgroup label="Standard-Fächer">
@@ -293,7 +385,6 @@
                     </optgroup>
                     <option value="custom">➕ Neues Fach hinzufügen...</option>
                 </select>
-                <input type="text" id="description" placeholder="z.B. Schulaufgabe 1">
                 <select id="grade">
                     <option value="">Wählen</option>
                     <option value="1">1</option>
@@ -308,11 +399,10 @@
                     <option value="4.5">4-5</option>
                     <option value="5.5">5-6</option>
                 </select>
-                <select id="weight">
-                    <option value="1">1x (Extemporale)</option>
-                    <option value="2" selected>2x (Schulaufgabe)</option>
-                    <option value="3">3x</option>
-                </select>
+                <div class="weight-slider-container">
+                    <input type="range" id="weight" min="0.5" max="2.5" step="0.5" value="2" oninput="updateWeightDisplay()">
+                    <div class="weight-display" id="weightDisplay">2x</div>
+                </div>
             </div>
             <button class="btn-add" onclick="addGrade()">Note hinzufügen</button>
         </div>
@@ -348,7 +438,13 @@
             
             displayGrades();
             calculateAverages();
+            updateWeightDisplay();
         };
+
+        function updateWeightDisplay() {
+            const weight = document.getElementById('weight').value;
+            document.getElementById('weightDisplay').textContent = weight + 'x';
+        }
 
         function handleSubjectChange() {
             const select = document.getElementById('subjectSelect');
@@ -383,7 +479,6 @@
         function addGrade() {
             const subjectSelect = document.getElementById('subjectSelect');
             const subject = subjectSelect.value;
-            const description = document.getElementById('description').value.trim();
             const grade = document.getElementById('grade').value;
             const weight = document.getElementById('weight').value;
 
@@ -400,9 +495,8 @@
             const gradeObj = {
                 id: Date.now(),
                 subject: subject,
-                description: description,
                 grade: parseFloat(grade),
-                weight: parseInt(weight)
+                weight: parseFloat(weight)
             };
 
             grades.push(gradeObj);
@@ -411,7 +505,6 @@
             calculateAverages();
 
             // Felder zurücksetzen
-            document.getElementById('description').value = '';
             document.getElementById('grade').value = '';
             // Fach-Auswahl bleibt bestehen für einfachere Mehrfacheingabe
         }
@@ -454,7 +547,6 @@
                         </div>
                         ${subjectGrades.map(g => `
                             <div class="grade-item">
-                                <div class="grade-name">${g.description || 'Ohne Beschreibung'}</div>
                                 <div class="grade-value">${formatGrade(g.grade)}</div>
                                 <div class="grade-weight">Gewichtung: ${g.weight}x</div>
                                 <button class="btn-delete" onclick="deleteGrade(${g.id})">✕</button>
@@ -526,10 +618,6 @@
             }
         }
 
-        // Enter-Taste zum Hinzufügen
-        document.getElementById('description').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') addGrade();
-        });
     </script>
 </body>
 </html>
