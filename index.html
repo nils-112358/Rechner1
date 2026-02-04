@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notenrechner - Bayern Realschule</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        .input-section {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .input-group {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr auto;
+            gap: 10px;
+            margin-bottom: 15px;
+            align-items: center;
+        }
+
+        label {
+            font-weight: 600;
+            color: #555;
+        }
+
+        input, select {
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+
+        .btn-add {
+            background: #667eea;
+            color: white;
+            grid-column: 1 / -1;
+        }
+
+        .btn-add:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-delete {
+            background: #e74c3c;
+            color: white;
+            padding: 8px 15px;
+        }
+
+        .btn-delete:hover {
+            background: #c0392b;
+        }
+
+        .grades-list {
+            margin-bottom: 20px;
+        }
+
+        .grade-item {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr auto;
+            gap: 15px;
+            align-items: center;
+            border: 2px solid #e0e0e0;
+            transition: all 0.3s;
+        }
+
+        .grade-item:hover {
+            border-color: #667eea;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .grade-name {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .grade-value {
+            color: #667eea;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .grade-weight {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .result-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .result-value {
+            font-size: 48px;
+            font-weight: bold;
+            margin: 15px 0;
+        }
+
+        .result-label {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px;
+            color: #999;
+        }
+
+        .clear-all {
+            background: #95a5a6;
+            color: white;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .clear-all:hover {
+            background: #7f8c8d;
+        }
+
+        .subject-group {
+            margin-bottom: 25px;
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        .subject-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 15px;
+            background: #667eea;
+            color: white;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .subject-average {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .grade-item {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            display: grid;
+            grid-template-columns: 3fr 1fr 1.2fr auto;
+            gap: 15px;
+            align-items: center;
+            border: 2px solid #e0e0e0;
+            transition: all 0.3s;
+        }
+
+        .subject-averages-section {
+            margin-bottom: 20px;
+        }
+
+        .note-scale {
+            background: #fff3cd;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 4px solid #ffc107;
+        }
+
+        .note-scale h3 {
+            color: #856404;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        .note-scale p {
+            color: #856404;
+            font-size: 14px;
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📚 Notenrechner</h1>
+        <div class="subtitle">Bayern Realschule</div>
+
+        <div class="note-scale">
+            <h3>Notenskala Bayern:</h3>
+            <p>1 = sehr gut | 2 = gut | 3 = befriedigend | 4 = ausreichend | 5 = mangelhaft | 6 = ungenügend</p>
+        </div>
+
+        <div class="input-section">
+            <div class="input-group">
+                <div>
+                    <label>Fach</label>
+                </div>
+                <div>
+                    <label>Beschreibung</label>
+                </div>
+                <div>
+                    <label>Note</label>
+                </div>
+                <div>
+                    <label>Gewichtung</label>
+                </div>
+                <div></div>
+            </div>
+            <div class="input-group" style="grid-template-columns: 1.5fr 1.5fr 1fr 1fr;">
+                <select id="subjectSelect" onchange="handleSubjectChange()">
+                    <option value="">Fach wählen...</option>
+                    <optgroup label="Standard-Fächer">
+                        <option value="Deutsch">Deutsch</option>
+                        <option value="Mathematik">Mathematik</option>
+                        <option value="Englisch">Englisch</option>
+                        <option value="Physik">Physik</option>
+                        <option value="Chemie">Chemie</option>
+                        <option value="Biologie">Biologie</option>
+                        <option value="Geschichte">Geschichte</option>
+                        <option value="Erdkunde">Erdkunde</option>
+                        <option value="Sozialkunde">Sozialkunde</option>
+                        <option value="Wirtschaft">Wirtschaft</option>
+                        <option value="Kunst">Kunst</option>
+                        <option value="Musik">Musik</option>
+                        <option value="Sport">Sport</option>
+                        <option value="Religion">Religion</option>
+                        <option value="Ethik">Ethik</option>
+                        <option value="IT">IT</option>
+                        <option value="Französisch">Französisch</option>
+                    </optgroup>
+                    <optgroup label="Eigene Fächer" id="customSubjectsGroup" style="display:none;">
+                    </optgroup>
+                    <option value="custom">➕ Neues Fach hinzufügen...</option>
+                </select>
+                <input type="text" id="description" placeholder="z.B. Schulaufgabe 1">
+                <select id="grade">
+                    <option value="">Wählen</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="1.5">1-2</option>
+                    <option value="2.5">2-3</option>
+                    <option value="3.5">3-4</option>
+                    <option value="4.5">4-5</option>
+                    <option value="5.5">5-6</option>
+                </select>
+                <select id="weight">
+                    <option value="1">1x (Extemporale)</option>
+                    <option value="2" selected>2x (Schulaufgabe)</option>
+                    <option value="3">3x</option>
+                </select>
+            </div>
+            <button class="btn-add" onclick="addGrade()">Note hinzufügen</button>
+        </div>
+
+        <div class="grades-list" id="gradesList"></div>
+
+        <div id="subjectAverages"></div>
+
+        <div class="result-section">
+            <div class="result-label">Gesamtdurchschnitt</div>
+            <div class="result-value" id="average">-</div>
+        </div>
+
+        <button class="clear-all" onclick="clearAll()">Alle Noten löschen</button>
+    </div>
+
+    <script>
+        let grades = [];
+        let customSubjects = [];
+
+        // Lade gespeicherte Noten und eigene Fächer beim Start
+        window.onload = function() {
+            const saved = localStorage.getItem('grades_bayern');
+            if (saved) {
+                grades = JSON.parse(saved);
+            }
+            
+            const savedCustomSubjects = localStorage.getItem('custom_subjects_bayern');
+            if (savedCustomSubjects) {
+                customSubjects = JSON.parse(savedCustomSubjects);
+                updateCustomSubjectsDropdown();
+            }
+            
+            displayGrades();
+            calculateAverages();
+        };
+
+        function handleSubjectChange() {
+            const select = document.getElementById('subjectSelect');
+            if (select.value === 'custom') {
+                const newSubject = prompt('Neues Fach hinzufügen:');
+                if (newSubject && newSubject.trim()) {
+                    const trimmedSubject = newSubject.trim();
+                    if (!customSubjects.includes(trimmedSubject)) {
+                        customSubjects.push(trimmedSubject);
+                        saveCustomSubjects();
+                        updateCustomSubjectsDropdown();
+                    }
+                    select.value = trimmedSubject;
+                } else {
+                    select.value = '';
+                }
+            }
+        }
+
+        function updateCustomSubjectsDropdown() {
+            const group = document.getElementById('customSubjectsGroup');
+            if (customSubjects.length > 0) {
+                group.style.display = 'block';
+                group.innerHTML = customSubjects.map(subject => 
+                    `<option value="${subject}">${subject}</option>`
+                ).join('');
+            } else {
+                group.style.display = 'none';
+            }
+        }
+
+        function addGrade() {
+            const subjectSelect = document.getElementById('subjectSelect');
+            const subject = subjectSelect.value;
+            const description = document.getElementById('description').value.trim();
+            const grade = document.getElementById('grade').value;
+            const weight = document.getElementById('weight').value;
+
+            if (!subject || subject === 'custom') {
+                alert('Bitte ein Fach auswählen!');
+                return;
+            }
+
+            if (!grade) {
+                alert('Bitte eine Note eingeben!');
+                return;
+            }
+
+            const gradeObj = {
+                id: Date.now(),
+                subject: subject,
+                description: description,
+                grade: parseFloat(grade),
+                weight: parseInt(weight)
+            };
+
+            grades.push(gradeObj);
+            saveGrades();
+            displayGrades();
+            calculateAverages();
+
+            // Felder zurücksetzen
+            document.getElementById('description').value = '';
+            document.getElementById('grade').value = '';
+            // Fach-Auswahl bleibt bestehen für einfachere Mehrfacheingabe
+        }
+
+        function deleteGrade(id) {
+            grades = grades.filter(g => g.id !== id);
+            saveGrades();
+            displayGrades();
+            calculateAverages();
+        }
+
+        function displayGrades() {
+            const list = document.getElementById('gradesList');
+            
+            if (grades.length === 0) {
+                list.innerHTML = '<div class="empty-state">Noch keine Noten eingetragen</div>';
+                return;
+            }
+
+            // Gruppiere Noten nach Fach
+            const groupedGrades = {};
+            grades.forEach(g => {
+                if (!groupedGrades[g.subject]) {
+                    groupedGrades[g.subject] = [];
+                }
+                groupedGrades[g.subject].push(g);
+            });
+
+            // Erstelle HTML für jede Fachgruppe
+            let html = '';
+            Object.keys(groupedGrades).sort().forEach(subject => {
+                const subjectGrades = groupedGrades[subject];
+                const avg = calculateSubjectAverage(subjectGrades);
+                
+                html += `
+                    <div class="subject-group">
+                        <div class="subject-header">
+                            <span>${subject}</span>
+                            <span class="subject-average">⌀ ${avg}</span>
+                        </div>
+                        ${subjectGrades.map(g => `
+                            <div class="grade-item">
+                                <div class="grade-name">${g.description || 'Ohne Beschreibung'}</div>
+                                <div class="grade-value">${formatGrade(g.grade)}</div>
+                                <div class="grade-weight">Gewichtung: ${g.weight}x</div>
+                                <button class="btn-delete" onclick="deleteGrade(${g.id})">✕</button>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+            });
+
+            list.innerHTML = html;
+        }
+
+        function calculateSubjectAverage(subjectGrades) {
+            let totalPoints = 0;
+            let totalWeight = 0;
+
+            subjectGrades.forEach(g => {
+                totalPoints += g.grade * g.weight;
+                totalWeight += g.weight;
+            });
+
+            return totalWeight > 0 ? (totalPoints / totalWeight).toFixed(2) : '-';
+        }
+
+        function formatGrade(grade) {
+            if (grade % 1 === 0.5) {
+                const lower = Math.floor(grade);
+                const upper = Math.ceil(grade);
+                return `${lower}-${upper}`;
+            }
+            return grade.toString();
+        }
+
+        function calculateAverages() {
+            const avgElement = document.getElementById('average');
+            
+            if (grades.length === 0) {
+                avgElement.textContent = '-';
+                return;
+            }
+
+            // Berechne Gesamtdurchschnitt über alle Fächer
+            let totalPoints = 0;
+            let totalWeight = 0;
+
+            grades.forEach(g => {
+                totalPoints += g.grade * g.weight;
+                totalWeight += g.weight;
+            });
+
+            const average = totalPoints / totalWeight;
+            avgElement.textContent = average.toFixed(2);
+        }
+
+        function saveGrades() {
+            localStorage.setItem('grades_bayern', JSON.stringify(grades));
+        }
+
+        function saveCustomSubjects() {
+            localStorage.setItem('custom_subjects_bayern', JSON.stringify(customSubjects));
+        }
+
+        function clearAll() {
+            if (confirm('Wirklich alle Noten löschen?')) {
+                grades = [];
+                saveGrades();
+                displayGrades();
+                calculateAverages();
+            }
+        }
+
+        // Enter-Taste zum Hinzufügen
+        document.getElementById('description').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') addGrade();
+        });
+    </script>
+</body>
+</html>
