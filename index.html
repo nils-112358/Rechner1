@@ -179,23 +179,19 @@
 
         .subject-group {
             margin-bottom: 25px;
-            background: linear-gradient(135deg, #2a2a3e 0%, #1e1e2e 100%);
-            padding: 15px;
-            border-radius: 10px;
-            border: 1px solid #3a3a4e;
         }
 
         .subject-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 10px 15px;
-            background: linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%);
+            padding: 15px 20px;
             color: white;
-            border-radius: 8px;
-            margin-bottom: 10px;
+            border-radius: 10px;
+            margin-bottom: 15px;
             font-weight: 600;
-            box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s;
         }
 
         .subject-average {
@@ -203,38 +199,62 @@
             font-weight: bold;
         }
 
-        .grade-item {
-            background: #2a2a3e;
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 8px;
+        .grades-grid {
             display: grid;
-            grid-template-columns: 1fr 1.5fr auto;
-            gap: 15px;
-            align-items: center;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+
+        .grade-item {
+            background: transparent;
+            padding: 10px;
+            border-radius: 8px;
             border: 2px solid #3a3a4e;
             transition: all 0.3s;
+            position: relative;
+            text-align: center;
         }
 
         .grade-item:hover {
             border-color: #8b5cf6;
             box-shadow: 0 3px 10px rgba(139, 92, 246, 0.3);
-        }
-
-        .grade-name {
-            font-weight: 600;
-            color: #e0e0e0;
+            transform: translateY(-2px);
         }
 
         .grade-value {
             color: #a78bfa;
             font-weight: bold;
-            font-size: 18px;
+            font-size: 24px;
+            margin-bottom: 5px;
         }
 
         .grade-weight {
-            color: #b0b0b0;
+            color: #9ca3af;
+            font-size: 12px;
+        }
+
+        .btn-delete-inline {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
             font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0.7;
+            transition: all 0.3s;
+        }
+
+        .btn-delete-inline:hover {
+            opacity: 1;
+            transform: scale(1.1);
         }
 
         .result-section {
@@ -244,6 +264,7 @@
             border-radius: 10px;
             text-align: center;
             box-shadow: 0 5px 20px rgba(139, 92, 246, 0.4);
+            margin-bottom: 20px;
         }
 
         .result-value {
@@ -315,31 +336,17 @@
             margin-bottom: 20px;
         }
 
-        .note-scale {
-            background: linear-gradient(135deg, #422006 0%, #78350f 100%);
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            border-left: 4px solid #f59e0b;
-        }
-
-        .note-scale h3 {
-            color: #fbbf24;
-            margin-bottom: 10px;
-            font-size: 16px;
-        }
-
-        .note-scale p {
-            color: #fcd34d;
-            font-size: 14px;
-            margin: 5px 0;
-        }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>📚 Notenrechner</h1>
         <div class="subtitle">Bayern Realschule</div>
+
+        <div class="result-section">
+            <div class="result-label">Gesamtdurchschnitt</div>
+            <div class="result-value" id="average">-</div>
+        </div>
 
         <div class="input-section">
             <div class="input-group">
@@ -405,11 +412,6 @@
         <div class="grades-list" id="gradesList"></div>
 
         <div id="subjectAverages"></div>
-
-        <div class="result-section">
-            <div class="result-label">Gesamtdurchschnitt</div>
-            <div class="result-value" id="average">-</div>
-        </div>
 
         <button class="clear-all" onclick="clearAll()">Alle Noten löschen</button>
     </div>
@@ -532,26 +534,52 @@
             let html = '';
             Object.keys(groupedGrades).sort().forEach(subject => {
                 const subjectGrades = groupedGrades[subject];
-                const avg = calculateSubjectAverage(subjectGrades);
+                const avg = parseFloat(calculateSubjectAverage(subjectGrades));
+                const bgColor = getGradeColor(avg);
                 
                 html += `
                     <div class="subject-group">
-                        <div class="subject-header">
+                        <div class="subject-header" style="background: ${bgColor};">
                             <span>${subject}</span>
-                            <span class="subject-average">⌀ ${avg}</span>
+                            <span class="subject-average">⌀ ${avg.toFixed(2)}</span>
                         </div>
-                        ${subjectGrades.map(g => `
-                            <div class="grade-item">
-                                <div class="grade-value">${formatGrade(g.grade)}</div>
-                                <div class="grade-weight">Gewichtung: ${g.weight}x</div>
-                                <button class="btn-delete" onclick="deleteGrade(${g.id})">✕</button>
-                            </div>
-                        `).join('')}
+                        <div class="grades-grid">
+                            ${subjectGrades.map(g => `
+                                <div class="grade-item">
+                                    <button class="btn-delete-inline" onclick="deleteGrade(${g.id})">✕</button>
+                                    <div class="grade-value">${formatGrade(g.grade)}</div>
+                                    <div class="grade-weight">${g.weight}x</div>
+                                </div>
+                            `).join('')}
+                        </div>
                     </div>
                 `;
             });
 
             list.innerHTML = html;
+        }
+
+        function getGradeColor(average) {
+            // Sehr gut (1.0-1.5): Grün
+            if (average <= 1.5) {
+                return 'linear-gradient(135deg, #10b981 0%, #059669 100%)';
+            }
+            // Gut (1.5-2.5): Hellgrün
+            else if (average <= 2.5) {
+                return 'linear-gradient(135deg, #34d399 0%, #10b981 100%)';
+            }
+            // Befriedigend (2.5-3.5): Gelb-Grün
+            else if (average <= 3.5) {
+                return 'linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%)';
+            }
+            // Ausreichend (3.5-4.5): Orange
+            else if (average <= 4.5) {
+                return 'linear-gradient(135deg, #fb923c 0%, #f97316 100%)';
+            }
+            // Mangelhaft/Ungenügend (>4.5): Rot
+            else {
+                return 'linear-gradient(135deg, #ef4444 0%, #dc2626 100%)';
+            }
         }
 
         function calculateSubjectAverage(subjectGrades) {
