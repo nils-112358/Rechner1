@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="de">
 <head>
     <meta charset="UTF-8">
@@ -11,636 +12,854 @@
             box-sizing: border-box;
         }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-            min-height: 100vh;
-            padding: 20px;
-        }
+```
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+        min-height: 100vh;
+        padding: 20px;
+    }
 
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: #1e1e2e;
-            border-radius: 15px;
-            padding: 30px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
-            border: 1px solid #2a2a3e;
-        }
+    .container {
+        max-width: 800px;
+        margin: 0 auto;
+        background: #1e1e2e;
+        border-radius: 15px;
+        padding: 30px;
+        box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+        border: 1px solid #2a2a3e;
+    }
 
-        h1 {
-            color: #e0e0e0;
-            margin-bottom: 10px;
-            text-align: center;
-        }
+    h1 {
+        color: #e0e0e0;
+        margin-bottom: 10px;
+        text-align: center;
+    }
 
-        .subtitle {
-            text-align: center;
-            color: #a0a0a0;
-            margin-bottom: 30px;
-            font-size: 14px;
-        }
+    .subtitle {
+        text-align: center;
+        color: #a0a0a0;
+        margin-bottom: 30px;
+        font-size: 14px;
+    }
 
-        .input-section {
-            background: linear-gradient(135deg, #2a2a3e 0%, #1e1e2e 100%);
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            border: 1px solid #3a3a4e;
-        }
+    .sync-section {
+        background: linear-gradient(135deg, #2a2a3e 0%, #1e1e2e 100%);
+        border-radius: 10px;
+        padding: 20px;
+        margin-bottom: 20px;
+        border: 1px solid #3a3a4e;
+    }
 
-        .input-group {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr auto;
-            gap: 10px;
-            margin-bottom: 15px;
-            align-items: center;
-        }
+    .sync-header {
+        font-size: 16px;
+        font-weight: 600;
+        color: #a78bfa;
+        margin-bottom: 15px;
+    }
 
-        label {
-            font-weight: 600;
-            color: #b0b0b0;
-        }
+    .sync-content {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
 
-        input, select {
-            padding: 10px;
-            border: 2px solid #3a3a4e;
-            border-radius: 5px;
-            font-size: 16px;
-            transition: border-color 0.3s;
-            background: #2a2a3e;
-            color: #e0e0e0;
-        }
+    .sync-status {
+        padding: 8px 12px;
+        background: #3a3a4e;
+        border-radius: 5px;
+        color: #9ca3af;
+        font-size: 14px;
+        text-align: center;
+    }
 
-        input:focus, select:focus {
-            outline: none;
-            border-color: #a78bfa;
-        }
+    .sync-status.synced {
+        background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        color: white;
+    }
 
-        select option {
-            background: #2a2a3e;
-            color: #e0e0e0;
-        }
+    .sync-buttons {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+    }
 
-        .weight-slider-container {
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-        }
+    .sync-buttons input {
+        flex: 1;
+        min-width: 150px;
+    }
 
-        input[type="range"] {
-            width: 100%;
-            height: 8px;
-            border-radius: 5px;
-            background: linear-gradient(90deg, #4a4a5e 0%, #6a5acd 50%, #a78bfa 100%);
-            outline: none;
-            padding: 0;
-            border: none;
-            cursor: pointer;
-        }
+    .btn-sync {
+        background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+        color: white;
+        padding: 8px 15px;
+        font-size: 14px;
+        white-space: nowrap;
+    }
 
-        input[type="range"]::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #a78bfa 0%, #8b5cf6 100%);
-            cursor: pointer;
-            transition: all 0.3s;
-            box-shadow: 0 2px 8px rgba(167, 139, 250, 0.4);
-        }
+    .btn-sync:hover {
+        background: linear-gradient(135deg, #818cf8 0%, #6366f1 100%);
+    }
 
-        input[type="range"]::-webkit-slider-thumb:hover {
-            background: linear-gradient(135deg, #c4b5fd 0%, #a78bfa 100%);
-            transform: scale(1.2);
-            box-shadow: 0 4px 12px rgba(167, 139, 250, 0.6);
-        }
+    .btn-logout {
+        background: linear-gradient(135deg, #6b7280 0%, #4b5563 100%);
+    }
 
-        input[type="range"]::-moz-range-thumb {
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #a78bfa 0%, #8b5cf6 100%);
-            cursor: pointer;
-            border: none;
-            transition: all 0.3s;
-            box-shadow: 0 2px 8px rgba(167, 139, 250, 0.4);
-        }
+    .btn-logout:hover {
+        background: linear-gradient(135deg, #9ca3af 0%, #6b7280 100%);
+    }
 
-        input[type="range"]::-moz-range-thumb:hover {
-            background: linear-gradient(135deg, #c4b5fd 0%, #a78bfa 100%);
-            transform: scale(1.2);
-            box-shadow: 0 4px 12px rgba(167, 139, 250, 0.6);
-        }
+    .sync-info {
+        font-size: 12px;
+        color: #6b7280;
+        padding: 8px;
+        background: #1e1e2e;
+        border-radius: 5px;
+        display: none;
+    }
 
-        .weight-display {
-            text-align: center;
-            font-weight: bold;
-            color: #a78bfa;
-            font-size: 16px;
-        }
+    .sync-info.show {
+        display: block;
+    }
 
-        button {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-weight: 600;
-        }
+    .input-section {
+        background: linear-gradient(135deg, #2a2a3e 0%, #1e1e2e 100%);
+        padding: 20px;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        border: 1px solid #3a3a4e;
+    }
 
-        .btn-add {
-            background: linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%);
-            color: white;
-            grid-column: 1 / -1;
-        }
+    .input-group {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr auto;
+        gap: 10px;
+        margin-bottom: 15px;
+        align-items: center;
+    }
 
-        .btn-add:hover {
-            background: linear-gradient(135deg, #a78bfa 0%, #818cf8 100%);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(139, 92, 246, 0.4);
-        }
+    label {
+        font-weight: 600;
+        color: #b0b0b0;
+    }
 
-        .btn-delete {
-            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
-            color: white;
-            padding: 8px 15px;
-        }
+    input, select {
+        padding: 10px;
+        border: 2px solid #3a3a4e;
+        border-radius: 5px;
+        font-size: 16px;
+        transition: border-color 0.3s;
+        background: #2a2a3e;
+        color: #e0e0e0;
+    }
 
-        .btn-delete:hover {
-            background: linear-gradient(135deg, #f87171 0%, #ef4444 100%);
-        }
+    input:focus, select:focus {
+        outline: none;
+        border-color: #a78bfa;
+    }
 
-        .grades-list {
-            margin-bottom: 20px;
-        }
+    select option {
+        background: #2a2a3e;
+        color: #e0e0e0;
+    }
 
-        .subject-group {
-            margin-bottom: 25px;
-        }
+    .weight-slider-container {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
 
-        .subject-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 20px;
-            color: white;
-            border-radius: 10px;
-            margin-bottom: 15px;
-            font-weight: 600;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-            transition: all 0.3s;
-        }
+    input[type="range"] {
+        width: 100%;
+        height: 8px;
+        border-radius: 5px;
+        background: linear-gradient(90deg, #4a4a5e 0%, #6a5acd 50%, #a78bfa 100%);
+        outline: none;
+        padding: 0;
+        border: none;
+        cursor: pointer;
+    }
 
-        .subject-average {
-            font-size: 20px;
-            font-weight: bold;
-        }
+    input[type="range"]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #a78bfa 0%, #8b5cf6 100%);
+        cursor: pointer;
+        transition: all 0.3s;
+        box-shadow: 0 2px 8px rgba(167, 139, 250, 0.4);
+    }
 
-        .grades-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-        }
+    input[type="range"]::-webkit-slider-thumb:hover {
+        background: linear-gradient(135deg, #c4b5fd 0%, #a78bfa 100%);
+        transform: scale(1.2);
+        box-shadow: 0 4px 12px rgba(167, 139, 250, 0.6);
+    }
 
-        .grade-item {
-            background: transparent;
-            padding: 10px;
-            border-radius: 8px;
-            border: 2px solid #3a3a4e;
-            transition: all 0.3s;
-            position: relative;
-            text-align: center;
-        }
+    input[type="range"]::-moz-range-thumb {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #a78bfa 0%, #8b5cf6 100%);
+        cursor: pointer;
+        border: none;
+        transition: all 0.3s;
+        box-shadow: 0 2px 8px rgba(167, 139, 250, 0.4);
+    }
 
-        .grade-item:hover {
-            border-color: #8b5cf6;
-            box-shadow: 0 3px 10px rgba(139, 92, 246, 0.3);
-            transform: translateY(-2px);
-        }
+    input[type="range"]::-moz-range-thumb:hover {
+        background: linear-gradient(135deg, #c4b5fd 0%, #a78bfa 100%);
+        transform: scale(1.2);
+        box-shadow: 0 4px 12px rgba(167, 139, 250, 0.6);
+    }
 
-        .grade-value {
-            color: #a78bfa;
-            font-weight: bold;
-            font-size: 24px;
-            margin-bottom: 5px;
-        }
+    .weight-display {
+        text-align: center;
+        font-weight: bold;
+        color: #a78bfa;
+        font-size: 16px;
+    }
 
-        .grade-weight {
-            color: #9ca3af;
-            font-size: 12px;
-        }
+    button {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: all 0.3s;
+        font-weight: 600;
+    }
 
-        .btn-delete-inline {
-            position: absolute;
-            top: 5px;
-            right: 5px;
-            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 24px;
-            height: 24px;
-            cursor: pointer;
-            font-size: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0.7;
-            transition: all 0.3s;
-        }
+    .btn-add {
+        background: linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%);
+        color: white;
+        grid-column: 1 / -1;
+    }
 
-        .btn-delete-inline:hover {
-            opacity: 1;
-            transform: scale(1.1);
-        }
+    .btn-add:hover {
+        background: linear-gradient(135deg, #a78bfa 0%, #818cf8 100%);
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(139, 92, 246, 0.4);
+    }
 
-        .result-section {
-            background: linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%);
-            color: white;
-            padding: 25px;
-            border-radius: 10px;
-            text-align: center;
-            box-shadow: 0 5px 20px rgba(139, 92, 246, 0.4);
-            margin-bottom: 20px;
-        }
+    .btn-delete {
+        background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+        color: white;
+        padding: 8px 15px;
+    }
 
-        .result-value {
-            font-size: 48px;
-            font-weight: bold;
-            margin: 15px 0;
-        }
+    .btn-delete:hover {
+        background: linear-gradient(135deg, #f87171 0%, #ef4444 100%);
+    }
 
-        .result-label {
-            font-size: 18px;
-            opacity: 0.9;
-        }
+    .grades-list {
+        margin-bottom: 20px;
+    }
 
-        .empty-state {
-            text-align: center;
-            padding: 40px;
-            color: #6b7280;
-        }
+    .subject-group {
+        margin-bottom: 25px;
+    }
 
-        .clear-all {
-            background: linear-gradient(135deg, #6b7280 0%, #4b5563 100%);
-            color: white;
-            width: 100%;
-            margin-top: 10px;
-        }
+    .subject-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 20px;
+        color: white;
+        border-radius: 10px;
+        margin-bottom: 15px;
+        font-weight: 600;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        transition: all 0.3s;
+    }
 
-        .clear-all:hover {
-            background: linear-gradient(135deg, #9ca3af 0%, #6b7280 100%);
-        }
+    .subject-average {
+        font-size: 20px;
+        font-weight: bold;
+    }
 
-        .subject-group {
-            margin-bottom: 25px;
-            background: #f8f9fa;
-            padding: 15px;
-            border-radius: 10px;
-        }
+    .grades-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+    }
 
-        .subject-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 15px;
-            background: #667eea;
-            color: white;
-            border-radius: 8px;
-            margin-bottom: 10px;
-            font-weight: 600;
-        }
+    .grade-item {
+        background: transparent;
+        padding: 10px;
+        border-radius: 8px;
+        border: 2px solid #3a3a4e;
+        transition: all 0.3s;
+        position: relative;
+        text-align: center;
+    }
 
-        .subject-average {
-            font-size: 20px;
-            font-weight: bold;
-        }
+    .grade-item:hover {
+        border-color: #8b5cf6;
+        box-shadow: 0 3px 10px rgba(139, 92, 246, 0.3);
+        transform: translateY(-2px);
+    }
 
-        .grade-item {
-            background: white;
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 8px;
-            display: grid;
-            grid-template-columns: 1fr 1.5fr auto;
-            gap: 15px;
-            align-items: center;
-            border: 2px solid #e0e0e0;
-            transition: all 0.3s;
-        }
+    .grade-value {
+        color: #a78bfa;
+        font-weight: bold;
+        font-size: 24px;
+        margin-bottom: 5px;
+    }
 
-        .subject-averages-section {
-            margin-bottom: 20px;
-        }
+    .grade-weight {
+        color: #9ca3af;
+        font-size: 12px;
+    }
 
-    </style>
+    .btn-delete-inline {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+        color: white;
+        border: none;
+        border-radius: 50%;
+        width: 24px;
+        height: 24px;
+        cursor: pointer;
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0.7;
+        transition: all 0.3s;
+    }
+
+    .btn-delete-inline:hover {
+        opacity: 1;
+        transform: scale(1.1);
+    }
+
+    .result-section {
+        background: linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%);
+        color: white;
+        padding: 25px;
+        border-radius: 10px;
+        text-align: center;
+        box-shadow: 0 5px 20px rgba(139, 92, 246, 0.4);
+        margin-bottom: 20px;
+    }
+
+    .result-value {
+        font-size: 48px;
+        font-weight: bold;
+        margin: 15px 0;
+    }
+
+    .result-label {
+        font-size: 18px;
+        opacity: 0.9;
+    }
+
+    .empty-state {
+        text-align: center;
+        padding: 40px;
+        color: #6b7280;
+    }
+
+    .clear-all {
+        background: linear-gradient(135deg, #6b7280 0%, #4b5563 100%);
+        color: white;
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    .clear-all:hover {
+        background: linear-gradient(135deg, #9ca3af 0%, #6b7280 100%);
+    }
+
+    .subject-group {
+        margin-bottom: 25px;
+        background: #f8f9fa;
+        padding: 15px;
+        border-radius: 10px;
+    }
+
+    .subject-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 15px;
+        background: #667eea;
+        color: white;
+        border-radius: 8px;
+        margin-bottom: 10px;
+        font-weight: 600;
+    }
+
+    .subject-average {
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    .grade-item {
+        background: white;
+        padding: 15px;
+        border-radius: 8px;
+        margin-bottom: 8px;
+        display: grid;
+        grid-template-columns: 1fr 1.5fr auto;
+        gap: 15px;
+        align-items: center;
+        border: 2px solid #e0e0e0;
+        transition: all 0.3s;
+    }
+
+    .subject-averages-section {
+        margin-bottom: 20px;
+    }
+
+</style>
+```
+
 </head>
 <body>
     <div class="container">
-        <h1>Notenrechner</h1>
-        <div class="subtitle">Nils Sander</div>
+        <h1>📚 Notenrechner</h1>
+        <div class="subtitle">Bayern Realschule</div>
 
-        <div class="result-section">
-            <div class="result-label">Gesamtdurchschnitt</div>
-            <div class="result-value" id="average">-</div>
-        </div>
-
-        <div class="input-section">
-            <div class="input-group">
-                <div>
-                    <label>Fach</label>
-                </div>
-                <div>
-                    <label>Note</label>
-                </div>
-                <div>
-                    <label>Gewichtung</label>
-                </div>
-                <div></div>
+```
+    <div class="sync-section">
+        <div class="sync-header">📁 GitHub Synchronisation</div>
+        <div class="sync-content">
+            <div class="sync-status">Daten werden in noten.txt gespeichert</div>
+            <div class="sync-buttons">
+                <button class="btn-sync" onclick="exportToFile()">💾 noten.txt herunterladen</button>
+                <label for="fileInput" class="btn-sync" style="margin: 0; cursor: pointer; display: inline-block;">
+                    📂 noten.txt laden
+                    <input type="file" id="fileInput" accept=".txt" style="display: none;" onchange="importFromFile(event)">
+                </label>
             </div>
-            <div class="input-group" style="grid-template-columns: 2fr 1fr 1.5fr;">
-                <select id="subjectSelect" onchange="handleSubjectChange()">
-                    <option value="">Fach wählen...</option>
-                    <optgroup label="Standard-Fächer">
-                        <option value="Deutsch">Deutsch</option>
-                        <option value="Mathematik">Mathematik</option>
-                        <option value="Englisch">Englisch</option>
-                        <option value="Physik">Physik</option>
-                        <option value="Chemie">Chemie</option>
-                        <option value="Biologie">Biologie</option>
-                        <option value="Geschichte">Geschichte</option>
-                        <option value="Erdkunde">Erdkunde</option>
-                        <option value="Sozialkunde">Sozialkunde</option>
-                        <option value="Wirtschaft">Wirtschaft</option>
-                        <option value="Kunst">Kunst</option>
-                        <option value="Musik">Musik</option>
-                        <option value="Sport">Sport</option>
-                        <option value="Religion">Religion</option>
-                        <option value="Ethik">Ethik</option>
-                        <option value="IT">IT</option>
-                        <option value="Französisch">Französisch</option>
-                    </optgroup>
-                    <optgroup label="Eigene Fächer" id="customSubjectsGroup" style="display:none;">
-                    </optgroup>
-                    <option value="custom">➕ Neues Fach hinzufügen...</option>
-                </select>
-                <select id="grade">
-                    <option value="">Wählen</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="1.5">1-2</option>
-                    <option value="2.5">2-3</option>
-                    <option value="3.5">3-4</option>
-                    <option value="4.5">4-5</option>
-                    <option value="5.5">5-6</option>
-                </select>
-                <div class="weight-slider-container">
-                    <input type="range" id="weight" min="0.5" max="2.5" step="0.5" value="2" oninput="updateWeightDisplay()">
-                    <div class="weight-display" id="weightDisplay">2x</div>
-                </div>
+            <div class="sync-info show">
+                <strong>GitHub Setup:</strong><br>
+                1. Erstelle ein GitHub Repository<br>
+                2. Lade die noten.txt Datei hoch<br>
+                3. Committe und pushe die Änderungen<br>
+                4. Auf anderen Geräten: Pull das Repository und lade die noten.txt
             </div>
-            <button class="btn-add" onclick="addGrade()">Note hinzufügen</button>
         </div>
-
-        <div class="grades-list" id="gradesList"></div>
-
-        <div id="subjectAverages"></div>
-
-        <button class="clear-all" onclick="clearAll()">Alle Noten löschen</button>
     </div>
 
-    <script>
-        let grades = [];
-        let customSubjects = [];
+    <div class="result-section">
+        <div class="result-label">Gesamtdurchschnitt</div>
+        <div class="result-value" id="average">-</div>
+    </div>
 
-        // Lade gespeicherte Noten und eigene Fächer beim Start
-        window.onload = function() {
-            const saved = localStorage.getItem('grades_bayern');
-            if (saved) {
-                grades = JSON.parse(saved);
-            }
-            
-            const savedCustomSubjects = localStorage.getItem('custom_subjects_bayern');
-            if (savedCustomSubjects) {
-                customSubjects = JSON.parse(savedCustomSubjects);
-                updateCustomSubjectsDropdown();
-            }
-            
-            displayGrades();
-            calculateAverages();
-            updateWeightDisplay();
-        };
+    <div class="input-section">
+        <div class="input-group">
+            <div>
+                <label>Fach</label>
+            </div>
+            <div>
+                <label>Note</label>
+            </div>
+            <div>
+                <label>Gewichtung</label>
+            </div>
+            <div></div>
+        </div>
+        <div class="input-group" style="grid-template-columns: 2fr 1fr 1.5fr;">
+            <select id="subjectSelect" onchange="handleSubjectChange()">
+                <option value="">Fach wählen...</option>
+                <optgroup label="Standard-Fächer">
+                    <option value="Deutsch">Deutsch</option>
+                    <option value="Mathematik">Mathematik</option>
+                    <option value="Englisch">Englisch</option>
+                    <option value="Physik">Physik</option>
+                    <option value="Chemie">Chemie</option>
+                    <option value="Biologie">Biologie</option>
+                    <option value="Geschichte">Geschichte</option>
+                    <option value="Erdkunde">Erdkunde</option>
+                    <option value="Sozialkunde">Sozialkunde</option>
+                    <option value="Wirtschaft">Wirtschaft</option>
+                    <option value="Kunst">Kunst</option>
+                    <option value="Musik">Musik</option>
+                    <option value="Sport">Sport</option>
+                    <option value="Religion">Religion</option>
+                    <option value="Ethik">Ethik</option>
+                    <option value="IT">IT</option>
+                    <option value="Französisch">Französisch</option>
+                </optgroup>
+                <optgroup label="Eigene Fächer" id="customSubjectsGroup" style="display:none;">
+                </optgroup>
+                <option value="custom">➕ Neues Fach hinzufügen...</option>
+            </select>
+            <select id="grade">
+                <option value="">Wählen</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="1.5">1-2</option>
+                <option value="2.5">2-3</option>
+                <option value="3.5">3-4</option>
+                <option value="4.5">4-5</option>
+                <option value="5.5">5-6</option>
+            </select>
+            <div class="weight-slider-container">
+                <input type="range" id="weight" min="0.5" max="2.5" step="0.5" value="2" oninput="updateWeightDisplay()">
+                <div class="weight-display" id="weightDisplay">2x</div>
+            </div>
+        </div>
+        <button class="btn-add" onclick="addGrade()">Note hinzufügen</button>
+    </div>
 
-        function updateWeightDisplay() {
-            const weight = document.getElementById('weight').value;
-            document.getElementById('weightDisplay').textContent = weight + 'x';
+    <div class="grades-list" id="gradesList"></div>
+
+    <div id="subjectAverages"></div>
+
+    <button class="clear-all" onclick="clearAll()">Alle Noten löschen</button>
+</div>
+
+<script>
+    let grades = [];
+    let customSubjects = [];
+
+    // Lade gespeicherte Noten beim Start
+    window.onload = function() {
+        loadLocalData();
+        updateWeightDisplay();
+        
+        // Versuche automatisch noten.txt zu laden, falls vorhanden
+        tryLoadNotenTxt();
+    };
+
+    function loadLocalData() {
+        const saved = localStorage.getItem('grades_bayern');
+        if (saved) {
+            grades = JSON.parse(saved);
         }
-
-        function handleSubjectChange() {
-            const select = document.getElementById('subjectSelect');
-            if (select.value === 'custom') {
-                const newSubject = prompt('Neues Fach hinzufügen:');
-                if (newSubject && newSubject.trim()) {
-                    const trimmedSubject = newSubject.trim();
-                    if (!customSubjects.includes(trimmedSubject)) {
-                        customSubjects.push(trimmedSubject);
-                        saveCustomSubjects();
-                        updateCustomSubjectsDropdown();
-                    }
-                    select.value = trimmedSubject;
-                } else {
-                    select.value = '';
-                }
-            }
+        
+        const savedCustomSubjects = localStorage.getItem('custom_subjects_bayern');
+        if (savedCustomSubjects) {
+            customSubjects = JSON.parse(savedCustomSubjects);
+            updateCustomSubjectsDropdown();
         }
+        
+        displayGrades();
+        calculateAverages();
+    }
 
-        function updateCustomSubjectsDropdown() {
-            const group = document.getElementById('customSubjectsGroup');
-            if (customSubjects.length > 0) {
-                group.style.display = 'block';
-                group.innerHTML = customSubjects.map(subject => 
-                    `<option value="${subject}">${subject}</option>`
-                ).join('');
-            } else {
-                group.style.display = 'none';
-            }
-        }
-
-        function addGrade() {
-            const subjectSelect = document.getElementById('subjectSelect');
-            const subject = subjectSelect.value;
-            const grade = document.getElementById('grade').value;
-            const weight = document.getElementById('weight').value;
-
-            if (!subject || subject === 'custom') {
-                alert('Bitte ein Fach auswählen!');
-                return;
-            }
-
-            if (!grade) {
-                alert('Bitte eine Note eingeben!');
-                return;
-            }
-
-            const gradeObj = {
-                id: Date.now(),
-                subject: subject,
-                grade: parseFloat(grade),
-                weight: parseFloat(weight)
-            };
-
-            grades.push(gradeObj);
-            saveGrades();
-            displayGrades();
-            calculateAverages();
-
-            // Felder zurücksetzen
-            document.getElementById('grade').value = '';
-            // Fach-Auswahl bleibt bestehen für einfachere Mehrfacheingabe
-        }
-
-        function deleteGrade(id) {
-            grades = grades.filter(g => g.id !== id);
-            saveGrades();
-            displayGrades();
-            calculateAverages();
-        }
-
-        function displayGrades() {
-            const list = document.getElementById('gradesList');
-            
-            if (grades.length === 0) {
-                list.innerHTML = '<div class="empty-state">Noch keine Noten eingetragen</div>';
-                return;
-            }
-
-            // Gruppiere Noten nach Fach
-            const groupedGrades = {};
-            grades.forEach(g => {
-                if (!groupedGrades[g.subject]) {
-                    groupedGrades[g.subject] = [];
-                }
-                groupedGrades[g.subject].push(g);
-            });
-
-            // Erstelle HTML für jede Fachgruppe
-            let html = '';
-            Object.keys(groupedGrades).sort().forEach(subject => {
-                const subjectGrades = groupedGrades[subject];
-                const avg = parseFloat(calculateSubjectAverage(subjectGrades));
-                const bgColor = getGradeColor(avg);
+    async function tryLoadNotenTxt() {
+        // Versuche noten.txt aus dem gleichen Verzeichnis zu laden
+        try {
+            const response = await fetch('noten.txt');
+            if (response.ok) {
+                const text = await response.text();
+                const data = JSON.parse(text);
                 
-                html += `
-                    <div class="subject-group">
-                        <div class="subject-header" style="background: ${bgColor};">
-                            <span>${subject}</span>
-                            <span class="subject-average">⌀ ${avg.toFixed(2)}</span>
-                        </div>
-                        <div class="grades-grid">
-                            ${subjectGrades.map(g => `
-                                <div class="grade-item">
-                                    <button class="btn-delete-inline" onclick="deleteGrade(${g.id})">✕</button>
-                                    <div class="grade-value">${formatGrade(g.grade)}</div>
-                                    <div class="grade-weight">${g.weight}x</div>
-                                </div>
-                            `).join('')}
-                        </div>
-                    </div>
-                `;
-            });
-
-            list.innerHTML = html;
-        }
-
-        function getGradeColor(average) {
-            // Sehr gut (1.0-1.5): Grün
-            if (average <= 1.5) {
-                return 'linear-gradient(135deg, #10b981 0%, #059669 100%)';
-            }
-            // Gut (1.5-2.5): Hellgrün
-            else if (average <= 2.5) {
-                return 'linear-gradient(135deg, #34d399 0%, #10b981 100%)';
-            }
-            // Befriedigend (2.5-3.5): Gelb-Grün
-            else if (average <= 3.5) {
-                return 'linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%)';
-            }
-            // Ausreichend (3.5-4.5): Orange
-            else if (average <= 4.5) {
-                return 'linear-gradient(135deg, #fb923c 0%, #f97316 100%)';
-            }
-            // Mangelhaft/Ungenügend (>4.5): Rot
-            else {
-                return 'linear-gradient(135deg, #ef4444 0%, #dc2626 100%)';
-            }
-        }
-
-        function calculateSubjectAverage(subjectGrades) {
-            let totalPoints = 0;
-            let totalWeight = 0;
-
-            subjectGrades.forEach(g => {
-                totalPoints += g.grade * g.weight;
-                totalWeight += g.weight;
-            });
-
-            return totalWeight > 0 ? (totalPoints / totalWeight).toFixed(2) : '-';
-        }
-
-        function formatGrade(grade) {
-            if (grade % 1 === 0.5) {
-                const lower = Math.floor(grade);
-                const upper = Math.ceil(grade);
-                return `${lower}-${upper}`;
-            }
-            return grade.toString();
-        }
-
-        function calculateAverages() {
-            const avgElement = document.getElementById('average');
-            
-            if (grades.length === 0) {
-                avgElement.textContent = '-';
-                return;
-            }
-
-            // Berechne Gesamtdurchschnitt über alle Fächer
-            let totalPoints = 0;
-            let totalWeight = 0;
-
-            grades.forEach(g => {
-                totalPoints += g.grade * g.weight;
-                totalWeight += g.weight;
-            });
-
-            const average = totalPoints / totalWeight;
-            avgElement.textContent = average.toFixed(2);
-        }
-
-        function saveGrades() {
-            localStorage.setItem('grades_bayern', JSON.stringify(grades));
-        }
-
-        function saveCustomSubjects() {
-            localStorage.setItem('custom_subjects_bayern', JSON.stringify(customSubjects));
-        }
-
-        function clearAll() {
-            if (confirm('Wirklich alle Noten löschen?')) {
-                grades = [];
-                saveGrades();
+                grades = data.grades || [];
+                customSubjects = data.customSubjects || [];
+                
+                updateCustomSubjectsDropdown();
                 displayGrades();
                 calculateAverages();
+                
+                console.log('noten.txt erfolgreich geladen');
+            }
+        } catch (error) {
+            // Datei existiert nicht oder kann nicht geladen werden - kein Problem
+            console.log('Keine noten.txt gefunden - verwende localStorage');
+        }
+    }
+
+    function exportToFile() {
+        const data = {
+            grades: grades,
+            customSubjects: customSubjects,
+            lastModified: new Date().toISOString()
+        };
+
+        const jsonString = JSON.stringify(data, null, 2);
+        const blob = new Blob([jsonString], { type: 'text/plain' });
+        const url = URL.createObjectURL(blob);
+        
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'noten.txt';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+        
+        showMessage('noten.txt wurde heruntergeladen! Du kannst sie jetzt in dein GitHub Repository hochladen.', 'success');
+    }
+
+    function importFromFile(event) {
+        const file = event.target.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            try {
+                const data = JSON.parse(e.target.result);
+                
+                grades = data.grades || [];
+                customSubjects = data.customSubjects || [];
+                
+                saveGrades();
+                saveCustomSubjects();
+                
+                updateCustomSubjectsDropdown();
+                displayGrades();
+                calculateAverages();
+                
+                showMessage('Daten erfolgreich aus noten.txt geladen!', 'success');
+            } catch (error) {
+                showMessage('Fehler beim Laden der Datei. Bitte überprüfe das Format.', 'error');
+                console.error('Import error:', error);
+            }
+        };
+        reader.readAsText(file);
+        
+        // Reset input
+        event.target.value = '';
+    }
+
+    function showMessage(message, type) {
+        const syncInfo = document.querySelector('.sync-info');
+        const originalContent = syncInfo.innerHTML;
+        
+        syncInfo.innerHTML = message;
+        syncInfo.style.background = type === 'success' ? 'linear-gradient(135deg, #10b981 0%, #059669 100%)' : 'linear-gradient(135deg, #ef4444 0%, #dc2626 100%)';
+        syncInfo.style.color = 'white';
+        syncInfo.style.padding = '12px';
+        
+        setTimeout(() => {
+            syncInfo.innerHTML = originalContent;
+            syncInfo.style.background = '#1e1e2e';
+            syncInfo.style.color = '#6b7280';
+            syncInfo.style.padding = '8px';
+        }, 3000);
+    }
+
+    function updateWeightDisplay() {
+        const weight = document.getElementById('weight').value;
+        document.getElementById('weightDisplay').textContent = weight + 'x';
+    }
+
+    function handleSubjectChange() {
+        const select = document.getElementById('subjectSelect');
+        if (select.value === 'custom') {
+            const newSubject = prompt('Neues Fach hinzufügen:');
+            if (newSubject && newSubject.trim()) {
+                const trimmedSubject = newSubject.trim();
+                if (!customSubjects.includes(trimmedSubject)) {
+                    customSubjects.push(trimmedSubject);
+                    saveCustomSubjects();
+                    updateCustomSubjectsDropdown();
+                }
+                select.value = trimmedSubject;
+            } else {
+                select.value = '';
             }
         }
+    }
 
-    </script>
+    function updateCustomSubjectsDropdown() {
+        const group = document.getElementById('customSubjectsGroup');
+        if (customSubjects.length > 0) {
+            group.style.display = 'block';
+            group.innerHTML = customSubjects.map(subject => 
+                `<option value="${subject}">${subject}</option>`
+            ).join('');
+        } else {
+            group.style.display = 'none';
+        }
+    }
+
+    function addGrade() {
+        const subjectSelect = document.getElementById('subjectSelect');
+        const subject = subjectSelect.value;
+        const grade = document.getElementById('grade').value;
+        const weight = document.getElementById('weight').value;
+
+        if (!subject || subject === 'custom') {
+            alert('Bitte ein Fach auswählen!');
+            return;
+        }
+
+        if (!grade) {
+            alert('Bitte eine Note eingeben!');
+            return;
+        }
+
+        const gradeObj = {
+            id: Date.now(),
+            subject: subject,
+            grade: parseFloat(grade),
+            weight: parseFloat(weight)
+        };
+
+        grades.push(gradeObj);
+        saveGrades();
+        displayGrades();
+        calculateAverages();
+
+        // Felder zurücksetzen
+        document.getElementById('grade').value = '';
+        // Fach-Auswahl bleibt bestehen für einfachere Mehrfacheingabe
+    }
+
+    function deleteGrade(id) {
+        grades = grades.filter(g => g.id !== id);
+        saveGrades();
+        displayGrades();
+        calculateAverages();
+    }
+
+    function displayGrades() {
+        const list = document.getElementById('gradesList');
+        
+        if (grades.length === 0) {
+            list.innerHTML = '<div class="empty-state">Noch keine Noten eingetragen</div>';
+            return;
+        }
+
+        // Gruppiere Noten nach Fach
+        const groupedGrades = {};
+        grades.forEach(g => {
+            if (!groupedGrades[g.subject]) {
+                groupedGrades[g.subject] = [];
+            }
+            groupedGrades[g.subject].push(g);
+        });
+
+        // Erstelle HTML für jede Fachgruppe
+        let html = '';
+        Object.keys(groupedGrades).sort().forEach(subject => {
+            const subjectGrades = groupedGrades[subject];
+            const avg = parseFloat(calculateSubjectAverage(subjectGrades));
+            const bgColor = getGradeColor(avg);
+            
+            html += `
+                <div class="subject-group">
+                    <div class="subject-header" style="background: ${bgColor};">
+                        <span>${subject}</span>
+                        <span class="subject-average">⌀ ${avg.toFixed(2)}</span>
+                    </div>
+                    <div class="grades-grid">
+                        ${subjectGrades.map(g => `
+                            <div class="grade-item">
+                                <button class="btn-delete-inline" onclick="deleteGrade(${g.id})">✕</button>
+                                <div class="grade-value">${formatGrade(g.grade)}</div>
+                                <div class="grade-weight">${g.weight}x</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        });
+
+        list.innerHTML = html;
+    }
+
+    function getGradeColor(average) {
+        // Sehr gut (1.0-1.5): Grün
+        if (average <= 1.5) {
+            return 'linear-gradient(135deg, #10b981 0%, #059669 100%)';
+        }
+        // Gut (1.5-2.5): Hellgrün
+        else if (average <= 2.5) {
+            return 'linear-gradient(135deg, #34d399 0%, #10b981 100%)';
+        }
+        // Befriedigend (2.5-3.5): Gelb-Grün
+        else if (average <= 3.5) {
+            return 'linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%)';
+        }
+        // Ausreichend (3.5-4.5): Orange
+        else if (average <= 4.5) {
+            return 'linear-gradient(135deg, #fb923c 0%, #f97316 100%)';
+        }
+        // Mangelhaft/Ungenügend (>4.5): Rot
+        else {
+            return 'linear-gradient(135deg, #ef4444 0%, #dc2626 100%)';
+        }
+    }
+
+    function calculateSubjectAverage(subjectGrades) {
+        let totalPoints = 0;
+        let totalWeight = 0;
+
+        subjectGrades.forEach(g => {
+            totalPoints += g.grade * g.weight;
+            totalWeight += g.weight;
+        });
+
+        return totalWeight > 0 ? (totalPoints / totalWeight).toFixed(2) : '-';
+    }
+
+    function formatGrade(grade) {
+        if (grade % 1 === 0.5) {
+            const lower = Math.floor(grade);
+            const upper = Math.ceil(grade);
+            return `${lower}-${upper}`;
+        }
+        return grade.toString();
+    }
+
+    function calculateAverages() {
+        const avgElement = document.getElementById('average');
+        
+        if (grades.length === 0) {
+            avgElement.textContent = '-';
+            return;
+        }
+
+        // Gruppiere Noten nach Fach
+        const groupedGrades = {};
+        grades.forEach(g => {
+            if (!groupedGrades[g.subject]) {
+                groupedGrades[g.subject] = [];
+            }
+            groupedGrades[g.subject].push(g);
+        });
+
+        // Berechne Durchschnitt jedes Fachs
+        const subjectAverages = [];
+        Object.keys(groupedGrades).forEach(subject => {
+            const avg = parseFloat(calculateSubjectAverage(groupedGrades[subject]));
+            subjectAverages.push(avg);
+        });
+
+        // Berechne Gesamtdurchschnitt aus Fachdurchschnitten
+        if (subjectAverages.length > 0) {
+            const totalAverage = subjectAverages.reduce((sum, avg) => sum + avg, 0) / subjectAverages.length;
+            avgElement.textContent = totalAverage.toFixed(2);
+        } else {
+            avgElement.textContent = '-';
+        }
+    }
+
+    function saveGrades() {
+        localStorage.setItem('grades_bayern', JSON.stringify(grades));
+    }
+
+    function saveCustomSubjects() {
+        localStorage.setItem('custom_subjects_bayern', JSON.stringify(customSubjects));
+    }
+
+    function clearAll() {
+        if (confirm('Wirklich alle Noten löschen?')) {
+            grades = [];
+            saveGrades();
+            displayGrades();
+            calculateAverages();
+        }
+    }
+
+</script>
+```
+
 </body>
 </html>
