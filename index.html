@@ -611,22 +611,18 @@
                 return;
             }
 
-   const groupedGrades = {};
-    grades.forEach(g => {
-        if (!groupedGrades[g.subject]) {
-            groupedGrades[g.subject] = [];
-        }
-        groupedGrades[g.subject].push(g);
-    });
+            // Berechne Gesamtdurchschnitt über alle Fächer
+            let totalPoints = 0;
+            let totalWeight = 0;
 
-    // 2. Berechne Gesamtdurchschnitt aus Fachdurchschnitten
-    const subjectAverages = Object.values(groupedGrades).map(subjectGrades => 
-        parseFloat(calculateSubjectAverage(subjectGrades))
-    );
-    
-    const overallAverage = subjectAverages.reduce((sum, avg) => sum + avg, 0) / subjectAverages.length;
-    
-    avgElement.textContent = overallAverage.toFixed(2);
+            grades.forEach(g => {
+                totalPoints += g.grade * g.weight;
+                totalWeight += g.weight;
+            });
+
+            const average = totalPoints / totalWeight;
+            avgElement.textContent = average.toFixed(2);
+        }
 
         function saveGrades() {
             localStorage.setItem('grades_bayern', JSON.stringify(grades));
